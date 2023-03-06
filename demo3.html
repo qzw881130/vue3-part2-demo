@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo03</title>
+    <script src="https://unpkg.com/vue@next" ></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                name: 123,
+                pay: () => {
+                    console.log('pay you $500');
+                }
+            }
+        },
+        template: `
+            <h2>Test.com</h2>
+            <son name="jim" />
+            <son v-bind:name="name" />
+            <XiaoJiejie :pay="pay" />
+        `,
+    })
+    app.component('Son', {
+        props: ['name'],
+        template: `<div>Son Div, {{typeof name}} {{name}}</div>`
+    })
+    app.component('XiaoJiejie', {
+        props: ['pay'],
+        methods: {
+            handleClick(){
+                console.log('请付钱');
+                this.pay();
+            }
+        },
+        template: `
+            <div @click="this.handleClick">和小姐姐打招呼</div>
+        `
+    })
+
+    const vm = app.mount('#app');
+</script>
+</html>

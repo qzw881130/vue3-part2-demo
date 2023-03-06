@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo02</title>
+    <script src="https://unpkg.com/vue@next" ></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const counter = {
+        data(){
+            return {
+                count: 0,
+            }
+        },
+        template: `
+            <div>
+                {{count}}
+                <button @click="count++">Add</button>
+            </div>
+        `
+    }
+    const xiedajiaoxiangyashan = {
+        template: `
+            <h2>谢大脚</h2>
+        `
+    }
+
+    const app = Vue.createApp({
+        components: {//局部组件需要先注册，注册时可以重定义名
+            counter,
+            'xie-da-jiao' : xiedajiaoxiangyashan
+        },
+        template: `
+            <website />
+            <describe />
+            <counter />
+            <xie-da-jiao />
+        `,
+    })
+    app.component('website', {
+        template: `<h2>Test.com</h2>`
+    })
+    app.component('describe', {
+        template: `<div>this is test content</div>`
+    })
+    const vm = app.mount('#app');
+    //
+</script>
+</html>
