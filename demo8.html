@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo08</title>
+    <script src="https://unpkg.com/vue@next" ></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                jishi: "刘英"
+            }
+        },
+        template: `
+            <h2>Test.com</h2> 
+            <ji-shi> 
+                <b style="color: green; font-size: 40px">{{jishi}}</b>
+                <p><project /></p>
+            </ji-shi>
+            
+        `,
+    })
+    app.component('JiShi', {
+        data(){
+            return {
+                jishi: '谢大脚'
+            }
+        },
+        template: `
+            <div>
+                <span>经过您的慎重考虑，最终选择了 </span>
+                <span>
+                    <slot></slot>
+                </span>
+            </div>
+        `
+    })
+    app.component('project', {
+        template: `<span style="color: blue;">项目是：你大爷的</span>`
+    });
+
+    const vm = app.mount('#app');
+</script>
+</html>
