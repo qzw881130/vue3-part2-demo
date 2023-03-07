@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>demo13</title>
+    <script src="https://unpkg.com/vue@next" ></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {house: 'Beijing a book'}
+        },
+        provide: {
+            newHouse: 'Red Dream Book',
+        },
+        template: `
+            <h2>我有一套书，我先传给儿子</h2>
+            <child :house="house" />
+        `,
+    })
+    app.component('child', {
+        props: ['house'],
+        template: `
+            <div>--------------------------------</div>
+            <div>我是子组件,我要把书传递给我儿子</div>
+            <div>儿子接收{{house}}</div>
+            <child-child :house="house" />
+
+        `
+    })
+    app.component('child-child', {
+        props: ['house'],
+        inject: ['newHouse'],
+        template: `
+            <div>--------------------------</div>
+            <div>我是孙子，等待接收书</div>
+            <div>孙子接收{{house}}, {{newHouse}}</div>
+        `
+    })
+
+    const vm = app.mount('#app');
+</script>
+</html>
